@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use JWTAuth;
+use App\User;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class LoginController extends Controller
 {
@@ -37,39 +41,27 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    /**
-     * @override
-     * Get the login username to be used by the controller.
-     * 使用 name 字段作为登录用户名
-     *
-     * @return string
-     */
-    public function username()
+    public function authenticate(Request $request)
     {
-        return 'name';
-    }
+        // grab some user
+//        $user = User::first();
+//
+//        $token = JWTAuth::fromUser($user);
+//        return $token;
+        // grab credentials from the request
+        $credentials = $request->only('name', 'password');
 
-    /**
-     * @override
-     * 登录成功后的返回
-     * Send the response after the user was authenticated.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    protected function sendLoginResponse(Request $request)
-    {
-        $request->session()->regenerate();
-
-        $this->clearLoginAttempts($request);
-
-        // 自定义的api处理方式
-        if ($request->expectsJson()) {
-            return response()->json(['status'=>1, 'message'=>'登录成功']);
+        try {
+            // attempt to verify the credentials and create a token for the user
+            if (! $token = JWTAuth::attempt($credentials)) {
+                return response()->json(['error' => 'invalid_credentials'], 401);
+            }
+        } catch (JWTException $e) {
+            // something went wrong whilst attempting to encode the token
+            return response()->json(['error' => 'could_not_create_token'], 500);
         }
 
-        return $this->authenticated($request, $this->guard()->user())
-            ?: redirect()->intended($this->redirectPath());
+        // all good so return the token
+        return response()->json(compact('token'));
     }
-
 }

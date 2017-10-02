@@ -15,6 +15,28 @@ class NavigationController extends Controller
         return response()->json($tree);
     }
 
+    public function rootNodes(Request $request)
+    {
+        return Navigation::where('parent_id', 0)->get();
+    }
+
+    public function insert(Request $request)
+    {
+        $nav = Navigation::create([
+            'name'=> $request->get('name', ''),
+            'display_name'=> $request->get('display_name', ''),
+            'url'=> $request->get('url', ''),
+            'icon'=> $request->get('icon', '1'),
+            'parent_id'=> $request->get('parent_id', 0),
+        ]);
+        if ($nav) {
+            return response()->json([]);
+        } else {
+            return response()->json(['error'=>'内部错误'], 500);
+        }
+
+    }
+
     private function arrayToTree($items, $parentId = 0) {
         $tree = [];
         foreach ($items as $item) {

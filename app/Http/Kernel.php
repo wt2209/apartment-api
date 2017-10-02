@@ -42,6 +42,7 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
             \Barryvdh\Cors\HandleCors::class,
+
         ],
     ];
 
@@ -68,5 +69,8 @@ class Kernel extends HttpKernel
         // jwt auth
         'jwt.auth' => \Tymon\JWTAuth\Middleware\GetUserFromToken::class,
         'jwt.refresh' => \Tymon\JWTAuth\Middleware\RefreshToken::class,
+
+        // entrust RBAC
+        'RBAC' => \App\Http\Middleware\RBACPermission::class,
     ];
 }

@@ -36,11 +36,18 @@ use Illuminate\Http\Request;
 
 Route::get('/login', 'Auth\LoginController@authenticate');
 
-// 中间件：每次登录时生成token，之后访问时必须携带此token，token值不变
-// 若要登录后每次访问时都哦生成一个新的token，则要加上 'jwt.refresh' 中间件
-Route::namespace('Api')->middleware(['api', 'jwt.auth'])->group(function () {
-    Route::get('/navigations', 'NavigationController@navigations');
-
+/**
+ *  中间件说明：
+ *  1. 每次登录时生成token，之后访问时必须携带此token，token值不变
+ *  2. 若要登录后每次访问时都生成一个新的token，则要加上 'jwt.refresh' 中间件
+ *  3. ’jwt.auth'使用后可以获得已登录的用户信息
+ *  4. 由于'RBAC'中间件使用时需要获得已登录的用户信息，因此它必须在’jwt.auth'之后使用。
+ *  5. 权限命名方式：请求方法名（get、post、put、delete之一） + 路由
+ */
+Route::namespace('Api')->middleware(['jwt.auth', 'api'])->group(function () {
+    Route::get('/navigations', 'NavigationController@navigations')->middleware('RBAC:get-navigations');
+    Route::post('/navigation', 'NavigationController@insert')->middleware('RBAC:post-navigation');
+    Route::get('root-nodes', 'NavigationController@rootNodes')->middleware('RBAC:get-root-nodes');
     Route::get('/rooms', 'RoomController@rooms');
 });
 

@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use JWTAuth;
-use App\User;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
+/**
+ * Class LoginController
+ * @package App\Http\Controllers\Auth
+ */
 class LoginController extends Controller
 {
     /*
@@ -38,16 +41,35 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+//        $this->middleware('guest')->except('logout');
     }
 
+    /**
+     * @return string
+     */
+    public function username()
+    {
+        return 'name';
+    }
+
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
     public function authenticate(Request $request)
     {
-        // grab some user
-//        $user = User::first();
-//
-//        $token = JWTAuth::fromUser($user);
-//        return $token;
+        $this->validateLogin($request);
+
+        // If the class is using the ThrottlesLogins trait, we can automatically throttle
+        // the login attempts for this application. We'll key this by the username and
+        // the IP address of the client making these requests into this application.
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
+        }
+
         // grab credentials from the request
         $credentials = $request->only('name', 'password');
 

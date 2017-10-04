@@ -12,22 +12,22 @@ class RoomTypeTableSeeder extends Seeder
     public function run()
     {
         RoomType::create([
-            'name' => 'college_rooms',
+            'name' => '大学生房间',
             'description'=>'大学生房间',
             'built_in' => 1,
         ]);
         RoomType::create([
-            'name' => 'worker_rooms',
+            'name' => '职工房间',
             'description'=>'职工房间',
             'built_in' => 1,
         ]);
         RoomType::create([
-            'name' => 'dispatch_rooms',
+            'name' => '派遣工房间',
             'description'=>'派遣工房间',
             'built_in' => 1,
         ]);
         RoomType::create([
-            'name' => 'rent_rooms',
+            'name' => '租赁房间',
             'description'=>'租赁房间',
             'built_in' => 1,
         ]);

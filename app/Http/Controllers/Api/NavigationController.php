@@ -34,7 +34,6 @@ class NavigationController extends Controller
         } else {
             return response()->json(['error'=>'内部错误'], 500);
         }
-
     }
 
     private function arrayToTree($items, $parentId = 0) {

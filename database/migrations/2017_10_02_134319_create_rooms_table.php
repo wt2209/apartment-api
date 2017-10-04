@@ -19,7 +19,7 @@ class CreateRoomsTable extends Migration
             $table->tinyInteger('status')->default(0)->comment('房间状态（是否空置）');
             $table->string('display_name');
             $table->string('building');
-            $table->tinyInteger('unit')->nullable();
+            $table->string('unit');
             $table->string('room');
             $table->tinyInteger('person_number')->comment('房间最大人数');
 

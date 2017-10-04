@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
+//    protected $fillable = ['room_type_id', 'status', 'display_name', 'building', 'unit', 'room', 'person_number', 'history_record', 'remark'];
+    protected $guarded = ['id'];
+
     /**
      * a room belongs to a type
      */

@@ -1,7 +1,11 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Model\Navigation;
 
+/**
+ * Class NavigationTableSeeder
+ */
 class NavigationTableSeeder extends Seeder
 {
     /**
@@ -11,56 +15,17 @@ class NavigationTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('navigations')->insert([
-            'name' => 'people',
-            'display_name'=>'人员',
-            'url' => '',
-            'icon'=>'',
-            'parent_id'=>0,
-        ]);
-        DB::table('navigations')->insert([
-            'name' => 'college',
-            'display_name'=>'大学生',
-            'url' => 'college',
-            'icon'=>'',
-            'parent_id'=>1,
-        ]);
-        DB::table('navigations')->insert([
-            'name' => 'worker',
-            'display_name'=>'职工',
-            'url' => 'worker',
-            'icon'=>'',
-            'parent_id'=>1,
-        ]);
-        DB::table('navigations')->insert([
-            'name' => 'dispatch_worker',
-            'display_name'=>'派遣工',
-            'url' => 'dispatcher',
-            'icon'=>'',
-            'parent_id'=>1,
-        ]);
-        DB::table('navigations')->insert([
-            'name' => 'rent',
-            'display_name'=>'租赁',
-            'url' => 'rent',
-            'icon'=>'',
-            'parent_id'=>1,
-        ]);
+        $this->setPerson();
+        $this->setRoom();
+        $this->setBill();
 
-        DB::table('navigations')->insert([
-            'name' => 'charge-lists',
-            'display_name'=>'费用',
-            'url' => '',
-            'icon'=>'',
-            'parent_id'=>0,
-        ]);
-        DB::table('navigations')->insert([
-            'name' => 'rent-charge-lists',
-            'display_name'=>'租赁费用',
-            'url' => 'rent-charge-lists',
-            'icon'=>'',
-            'parent_id'=>1,
-        ]);
+
+
+
+
+
+
+
         /**
          * $table->increments('id');
             $table->string('name');
@@ -70,5 +35,66 @@ class NavigationTableSeeder extends Seeder
             $table->unsignedInteger('parent_id')->default(0);
             $table->timestamps();
          */
+    }
+
+    private function setPerson()
+    {
+        $person = Navigation::create([
+            'name' => 'person-list',
+            'display_name'=>'人员',
+            'url' => '',
+            'icon'=>'',
+            'parent_id'=>0,
+        ]);
+        Navigation::create([
+            'name' => 'people',
+            'display_name'=>'明细',
+            'url' => 'people',
+            'icon'=>'',
+            'parent_id'=>$person->id,
+        ]);
+    }
+
+    private function setRoom()
+    {
+        $room = Navigation::create([
+            'name' => 'room-list',
+            'display_name'=>'房间',
+            'url' => '',
+            'icon'=>'',
+            'parent_id'=>0,
+        ]);
+        Navigation::create([
+            'name' => 'room',
+            'display_name'=>'明细',
+            'url' => 'rooms',
+            'icon'=>'',
+            'parent_id'=>$room->id,
+        ]);
+        Navigation::create([
+            'name' => 'room_type',
+            'display_name'=>'类型',
+            'url' => 'room-types',
+            'icon'=>'',
+            'parent_id'=>$room->id,
+        ]);
+    }
+
+    private function setBill()
+    {
+        $bill = Navigation::create([
+            'name' => 'bill-list',
+            'display_name'=>'费用',
+            'url' => '',
+            'icon'=>'',
+            'parent_id'=>0,
+        ]);
+        Navigation::create([
+            'name' => 'bill',
+            'display_name'=>'明细',
+            'url' => 'bills',
+            'icon'=>'',
+            'parent_id'=>$bill->id,
+        ]);
     }
 }

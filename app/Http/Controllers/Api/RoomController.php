@@ -7,6 +7,112 @@ use App\Http\Controllers\Controller;
 
 class RoomController extends Controller
 {
+
+    public function roomStructure()
+    {
+        $ret = [
+            [
+                'label' => '大学生房间',
+                'value'=>'',
+                'children'=>[
+                    [
+                        'label'=>'红2',
+                        'value'=>'',
+                        'children'=>[
+                            [
+                                'label'=>'1单元',
+                                'value'=>''
+                            ],
+                            [
+                                'label'=>'2单元',
+                                'value'=>''
+                            ],
+                            [
+                                'label'=>'3单元',
+                                'value'=>''
+                            ],
+                        ]
+                    ],
+                    [
+                        'label'=>'红3',
+                        'value'=>'',
+                        'children'=>[
+                            [
+                                'label'=>'1单元',
+                                'value'=>''
+                            ],
+                            [
+                                'label'=>'2单元',
+                                'value'=>''
+                            ],
+                            [
+                                'label'=>'3单元',
+                                'value'=>''
+                            ],
+                            [
+                                'label'=>'4单元',
+                                'value'=>''
+                            ],
+                        ]
+                    ],
+                    [
+                        'label'=>'7',
+                        'value'=>'',
+                        'children'=>[
+                            [
+                                'label'=>'1单元',
+                                'value'=>''
+                            ],
+                            [
+                                'label'=>'2单元',
+                                'value'=>''
+                            ],
+                            [
+                                'label'=>'3单元',
+                                'value'=>''
+                            ],
+                            [
+                                'label'=>'4单元',
+                                'value'=>''
+                            ],
+                            [
+                                'label'=>'5单元',
+                                'value'=>''
+                            ],
+                        ]
+                    ],
+                ]
+            ],
+            [
+                'label' => '职工房间',
+                'value'=>'',
+                'children'=>[
+                    [
+                        'label'=>'高2',
+                        'value'=>'',
+                        'children'=>[
+                            [
+                                'label'=>'1单元',
+                                'value'=>''
+                            ],
+                            [
+                                'label'=>'2单元',
+                                'value'=>''
+                            ],
+                            [
+                                'label'=>'3单元',
+                                'value'=>''
+                            ],
+                        ]
+                    ]
+                ]
+            ],
+        ];
+        return response()->json($ret);
+    }
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function rooms()
     {
         $rooms = [[

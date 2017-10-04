@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'apartment-api'),
 
     /*
     |--------------------------------------------------------------------------
@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'PRC',
 
     /*
     |--------------------------------------------------------------------------
@@ -183,6 +183,9 @@ return [
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         // entrust
         Zizaco\Entrust\EntrustServiceProvider::class,
+        // laravel-ide-helper
+        // auto register when environment not equals 'production'
+        // Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
     ],
 

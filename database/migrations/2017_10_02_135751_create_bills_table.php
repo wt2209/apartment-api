@@ -38,9 +38,9 @@ class CreateBillsTable extends Migration
             $table->json('detail')->comment('费用明细');
             $table->string('payer')->comment('付款人');
             $table->tinyInteger('payed')->default(0)->comment('是否缴费');
-            $table->timestamp('payed_at')->comment('缴费时间');
+            $table->timestamp('payed_at')->nullable()->comment('缴费时间');
             $table->tinyInteger('printed')->default(0)->comment('是否打印缴费单');
-            $table->timestamp('printed_at');
+            $table->timestamp('printed_at')->nullable();
 
             $table->timestamps();
         });

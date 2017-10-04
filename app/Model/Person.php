@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Person extends Model
 {
+
+    protected $guarded = ['id'];
     /**
      * a person belongs to a room
      */

@@ -33,9 +33,14 @@ class CreateBillsTable extends Migration
 
             $table->tinyInteger('symbol')->default(1)->comment('是否是退费，取值1和-1');
             $table->decimal('fees', 8, 2)->comment('费用金额');
+            $table->tinyInteger('late_fees_on')->default(0)->comment('是否收取滞纳金');
+            $table->decimal('late_rate', 5, 3)->default(0.003)->comment('滞纳金费率');
             $table->decimal('late_fees', 8, 2)->comment('滞纳金');
-            $table->decimal('total_fees', 8, 2)->comment('费用与滞纳金之和，即实际交的钱');
-            $table->json('detail')->comment('费用明细');
+            $table->string('late_fees_base')->comment('以哪个费用为计算滞纳金的基数，取值为：总费用|租金|其他。。。');
+            $table->timestamp('late_at')->comment('计算滞纳金的时间');
+            $table->decimal('total_fees', 8, 2)->comment('实际缴费，费用与滞纳金之和');
+            $table->decimal('turn_in_fees')->comment('应上缴北船财务的钱，包含滞纳金');
+            $table->json('items')->comment('费用明细，字段：item,money,description,turn_in(是否上缴北船)');
             $table->string('payer')->comment('付款人');
             $table->tinyInteger('payed')->default(0)->comment('是否缴费');
             $table->timestamp('payed_at')->nullable()->comment('缴费时间');

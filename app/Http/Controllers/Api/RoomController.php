@@ -34,6 +34,12 @@ class RoomController extends Controller
 
         return response()->json($ret);
     }
+
+    public function roomTypes()
+    {
+        return RoomType::get();
+    }
+
     /**
      * @return \Illuminate\Http\JsonResponse
      */

@@ -14,7 +14,7 @@ class CreateBillsTable extends Migration
     public function up()
     {
         /**
-         *TODO 还需建立一个表，记录缴费项目明细。
+         * 缴费项目明细表。
          *     此表的作用是在用户需要查询某项特定费用时，给予用户选择此项特定费用项目
          *     根据用户选择的项目查询json，格式化后输出项目明细或者费用总和
          *     租赁电费、水费、单身超费、单身床位费等都属于此表的内置内容。
@@ -28,7 +28,7 @@ class CreateBillsTable extends Migration
             // 此三项至少有一个不为空
             $table->unsignedInteger('person_id');
             $table->unsignedInteger('room_id');
-            $table->string('title')->comment('费用项目');
+            $table->string('bill_type_id')->comment('费用项目');
             // 此三项至少有一个不为空
 
             $table->tinyInteger('symbol')->default(1)->comment('是否是退费，取值1和-1');
@@ -36,7 +36,7 @@ class CreateBillsTable extends Migration
             $table->tinyInteger('late_fees_on')->default(0)->comment('是否收取滞纳金');
             $table->decimal('late_rate', 5, 3)->default(0.003)->comment('滞纳金费率');
             $table->decimal('late_fees', 8, 2)->comment('滞纳金');
-            $table->string('late_fees_base')->comment('以哪个费用为计算滞纳金的基数，取值为：总费用|租金|其他。。。');
+            $table->decimal('late_fees_base')->comment('滞纳金的基数');
             $table->timestamp('late_at')->comment('计算滞纳金的时间');
             $table->decimal('total_fees', 8, 2)->comment('实际缴费，费用与滞纳金之和');
             $table->decimal('turn_in_fees')->comment('应上缴北船财务的钱，包含滞纳金');

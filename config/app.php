@@ -187,6 +187,8 @@ return [
         // auto register when environment not equals 'production'
         // Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
+        // laravel-pinyin
+        Overtrue\LaravelPinyin\ServiceProvider::class,
     ],
 
     /*
@@ -240,6 +242,8 @@ return [
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
 
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+
+        'Pinyin' => Overtrue\LaravelPinyin\Facades\Pinyin::class,
 
     ],
 

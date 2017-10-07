@@ -35,7 +35,7 @@ class RoomTableSeeder extends Seeder
                     if ($i == 6) $person_number = 6;
                     Room::create([
                         'display_name'=>$building . '-' . $unit . '-' . $i.'01',
-                        'status'=> random_int(0,1),
+                        'status'=> 0,
                         'building'=> $building,
                         'unit'=> $u,
                         'room'=> $i . '01',
@@ -44,7 +44,7 @@ class RoomTableSeeder extends Seeder
                     ]);
                     Room::create([
                         'display_name'=>$building . '-' . $unit . '-' . $i.'02',
-                        'status'=> random_int(0,1),
+                        'status'=> 0,
                         'building'=> $building,
                         'unit'=> $u,
                         'room'=> $i . '02',
@@ -113,7 +113,7 @@ class RoomTableSeeder extends Seeder
                 $u = $unit.'';
                 Room::create([
                     'display_name'=>'13-' . $unit . '-' . $i.'01',
-                    'status'=> random_int(0,1),
+                    'status'=> 0,
                     'building'=> '13',
                     'unit'=> $u,
                     'room'=> $i . '01',
@@ -124,7 +124,7 @@ class RoomTableSeeder extends Seeder
 
                 Room::create([
                     'display_name'=>'13-' . $unit . '-' . $i.'02',
-                    'status'=> random_int(0,1),
+                    'status'=> 0,
                     'building'=> '13',
                     'unit'=> $u,
                     'room'=> $i . '02',
@@ -157,7 +157,7 @@ class RoomTableSeeder extends Seeder
                     $u = $unit.'';
                     Room::create([
                         'display_name'=>$building . '-' . $unit . '-' . $i.'01',
-                        'status'=> random_int(0,1),
+                        'status'=> 0,
                         'building'=> $building,
                         'unit'=> $u,
                         'room'=> $i . '01',
@@ -168,7 +168,7 @@ class RoomTableSeeder extends Seeder
 
                     Room::create([
                         'display_name'=>$building . '-' . $unit . '-' . $i.'02',
-                        'status'=> random_int(0,1),
+                        'status'=> 0,
                         'building'=> $building,
                         'unit'=> $u,
                         'room'=> $i . '02',

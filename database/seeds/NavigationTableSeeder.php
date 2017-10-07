@@ -18,23 +18,6 @@ class NavigationTableSeeder extends Seeder
         $this->setPerson();
         $this->setRoom();
         $this->setBill();
-
-
-
-
-
-
-
-
-        /**
-         * $table->increments('id');
-            $table->string('name');
-            $table->string('display_name');
-            $table->string('url');
-            $table->string('icon'); // 图标
-            $table->unsignedInteger('parent_id')->default(0);
-            $table->timestamps();
-         */
     }
 
     private function setPerson()
@@ -93,6 +76,13 @@ class NavigationTableSeeder extends Seeder
             'name' => 'bill',
             'display_name'=>'明细',
             'url' => 'bills',
+            'icon'=>'',
+            'parent_id'=>$bill->id,
+        ]);
+        Navigation::create([
+            'name' => 'add-bill',
+            'display_name'=>'添加费用',
+            'url' => 'add-bill',
             'icon'=>'',
             'parent_id'=>$bill->id,
         ]);

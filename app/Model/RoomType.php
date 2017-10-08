@@ -10,6 +10,8 @@ class RoomType extends Model
 //    protected $fillable = ['name', 'description', 'built_in'];
     protected $guarded = ['id'];
 
+    protected $hidden = ['created_at', 'updated_at', 'built_in'];
+
     /**
      * a type has many rooms
      */

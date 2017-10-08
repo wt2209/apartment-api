@@ -18,14 +18,14 @@ class CreateRoomsTable extends Migration
             $table->unsignedInteger('room_type_id');
             $table->tinyInteger('status')->default(0)->comment('房间状态（是否空置）');
             $table->string('display_name');
-            $table->string('building');
-            $table->string('unit');
-            $table->string('room');
-            $table->tinyInteger('person_number')->comment('房间最大人数');
+            $table->string('building')->nullable();
+            $table->string('unit')->nullable();
+            $table->string('room')->nullable();
+            $table->tinyInteger('person_number')->default(1)->comment('房间最大人数');
 
             //格式： 2017-10-2：事件1|2017-9-15：事件2
             $table->text('history_record')->nullable()->comment('房间历史事件记录');
-            $table->string('remark')->default('');
+            $table->string('remark')->nullable();
             $table->timestamps();
         });
     }

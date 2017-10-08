@@ -34,10 +34,13 @@ class PersonTableSeeder extends Seeder
         Person::create([
             'room_id'=>$roomId,
             'name' => $name,
-            'short_name'=>pinyin_abbr($name),
             'gender' => $this->gender[random_int(0, 1)],
             'department'=>'涂装工程部',
             'checkin_at'=>\Carbon\Carbon::now(),
+            'rent_start_date'=>'2013-7-1',
+            'rent_end_date'=>'2017-10-1',
+            'contract_start_date'=>'2010-7-1',
+            'contract_end_date'=>'无固定期',
             'phone_number'=>'13542156321',
             'identify'=>'370215197812145214',
         ]);

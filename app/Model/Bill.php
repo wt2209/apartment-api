@@ -4,8 +4,19 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Bill
+ * @package App\Model
+ */
 class Bill extends Model
 {
+    /**
+     * the field 'items' will convert between json type and array type automatically
+     * @var array
+     */
+    protected $casts = [
+        'items' => 'array',
+    ];
     /**
      * TODO a bill may not has a person_id, is that OK ???
      * need some test

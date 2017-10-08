@@ -15,11 +15,11 @@ class CreateNavigationsTable extends Migration
     {
         Schema::create('navigations', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->default('')->nullable();
-            $table->string('display_name')->default('')->nullable();
-            $table->string('url')->default('')->nullable();
-            $table->string('icon')->default('')->nullable(); // 图标
-            $table->unsignedInteger('parent_id')->default(0)->nullable();
+            $table->string('name')->default('');
+            $table->string('display_name')->default('');
+            $table->string('url')->nullable();
+            $table->string('icon')->nullable(); // 图标
+            $table->unsignedInteger('parent_id')->default(0);
             $table->timestamps();
         });
     }

@@ -50,6 +50,7 @@ Route::namespace('Api')->middleware(['jwt.auth', 'api'])->group(function () {
     Route::post('/navigation', 'NavigationController@insert')->middleware('RBAC:post-navigation');
     Route::get('root-nodes', 'NavigationController@rootNodes')->middleware('RBAC:get-root-nodes');
     Route::get('/rooms', 'RoomController@rooms')->middleware('RBAC:get-rooms');
+    Route::get('/rooms/{id}', 'RoomController@rooms')->where('id', '[0-9]+')->middleware('RBAC:get-rooms');
     Route::get('/room-types', 'RoomController@roomTypes')->middleware('RBAC:get-room-types');
     Route::post('/bill', 'BillController@insert')->middleware('RBAC:post-bill');
     Route::get('/people', 'PersonController@people')->middleware('RBAC:get-people'); // 手动选择楼号

@@ -40,14 +40,17 @@ class RoomController extends Controller
         return RoomType::get();
     }
 
+
     /**
      * @return \Illuminate\Http\JsonResponse
      */
-    public function rooms()
+    public function rooms(Request $request, $id = null)
     {
+        if ($id) {
+            return Room::find($id);
+        }
         // TODO paginate
         $rooms = Room::with('type')->get();
-
         return response()->json($rooms);
     }
 

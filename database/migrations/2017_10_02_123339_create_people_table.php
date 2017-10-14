@@ -23,13 +23,13 @@ class CreatePeopleTable extends Migration
             $table->string('education')->nullable();
             $table->string('department')->nullable();
             $table->date('checkin_at')->nullable()->comment('入住时间');
-            $table->string('phone_number')->nullable()->index();
+            $table->string('phone_number')->nullable();
             $table->date('rent_start_date')->nullable()->comment('租赁合同开始日期');
             $table->date('rent_end_date')->nullable()->comment('租赁合同开始日期');
 
             //附加信息
             $table->string('identify')->nullable()->comment('身份证号码');
-            $table->string('standby_phone_number')->nullable()->index()->comment('备用联系电话');
+            $table->string('standby_phone_number')->nullable()->comment('备用联系电话');
             $table->date('contract_start_date')->nullable()->comment('劳动合同开始日期');
             $table->date('contract_end_date')->nullable()->comment('劳动合同开始日期');
             $table->string('spouse')->nullable()->comment('配偶姓名');
@@ -38,7 +38,11 @@ class CreatePeopleTable extends Migration
             $table->string('bed_number')->nullable();
             $table->string('remark')->nullable();
             $table->timestamps();
-            $table->index(['room_id', 'name', 'short_name', 'phone_number', 'standby_phone_number']);
+            $table->index('room_id');
+            $table->index('name');
+            $table->index('short_name');
+            $table->index('phone_number');
+            $table->index('standby_phone_number');
         });
     }
 

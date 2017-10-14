@@ -32,7 +32,7 @@ class RoomController extends Controller
             Cache::forever('roomStructure', $ret);
         }
 
-        return response()->json($ret);
+        return response()->json(['data' => $ret]);
     }
 
     public function roomTypes()
@@ -47,11 +47,12 @@ class RoomController extends Controller
     public function rooms(Request $request, $id = null)
     {
         if ($id) {
-            return Room::find($id);
+            $room = Room::with('type')->find($id);
+            return response()->json(['data'=>$room]);
         }
         // TODO paginate
         $rooms = Room::with('type')->get();
-        return response()->json($rooms);
+        return response()->json(['data' => $rooms]);
     }
 
     /**

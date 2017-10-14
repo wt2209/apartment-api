@@ -18,6 +18,8 @@ class CreateRoomTypesTable extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->tinyInteger('built_in')->default(0);
+            $table->tinyInteger('has_contract')->default(0)->comment('是否有租赁期限');
+            $table->tinyInteger('is_single')->default(0)->comment('是否是单身房间');
             $table->timestamps();
         });
     }

@@ -12,7 +12,7 @@ class NavigationController extends Controller
     {
         $navs = Navigation::get();
         $tree = $this->arrayToTree($navs->toArray());
-        return response()->json($tree);
+        return response()->json(['data' => $tree]);
     }
 
     public function rootNodes(Request $request)

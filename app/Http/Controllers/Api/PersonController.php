@@ -33,6 +33,12 @@ class PersonController extends Controller
         return response()->json($data);
     }
 
+    public function person($id)
+    {
+        if (is_numeric($id)) {
+            $this->repo->getPerson($id);
+        }
+    }
     public function store(Request $request)
     {
         $this->validatePostPerson($request);

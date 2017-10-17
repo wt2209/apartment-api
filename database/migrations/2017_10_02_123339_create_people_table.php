@@ -19,7 +19,7 @@ class CreatePeopleTable extends Migration
             // 基本信息
             $table->string('name');
             $table->string('short_name')->nullable()->comment('简写，如，张三：zs');
-            $table->enum('gender', ['男', '女'])->nullable();
+            $table->enum('gender', ['男', '女'])->default('男')->nullable();
             $table->string('education')->nullable();
             $table->string('department')->nullable();
             $table->date('checkin_at')->nullable()->comment('入住时间');

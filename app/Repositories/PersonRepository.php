@@ -25,6 +25,11 @@ class PersonRepository
         return $this->formatData($peopleInRooms);
     }
 
+    public function getPerson($id)
+    {
+        return Person::with('room')->where('id', $id)->first();
+    }
+
     public function storePerson($person)
     {
         return Person::create($person);

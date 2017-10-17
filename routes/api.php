@@ -54,6 +54,7 @@ Route::namespace('Api')->middleware(['jwt.auth', 'api'])->group(function () {
     Route::get('/room-types', 'RoomController@roomTypes')->middleware('RBAC:get-room-types');
     Route::post('/bill', 'BillController@insert')->middleware('RBAC:post-bill');
     Route::get('/people', 'PersonController@people')->middleware('RBAC:get-people');
+    Route::get('/people/{:id}', 'PersonController@person')->middleware('RBAC:get-person');
     Route::post('/people', 'PersonController@store')->middleware('RBAC:post-people');
 });
 

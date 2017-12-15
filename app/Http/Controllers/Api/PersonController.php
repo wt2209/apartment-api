@@ -44,6 +44,9 @@ class PersonController extends Controller
         $this->validatePostPerson($request);
 
         $person = $this->repo->storePerson($request->all());
+
+        // TODO 如果是租赁或者单身住户，则自动生成押金等费用
+        // 即 自动检查是否需要缴费
         if ($person != null) {
             return response()->json(['data'=>$person]);
         }

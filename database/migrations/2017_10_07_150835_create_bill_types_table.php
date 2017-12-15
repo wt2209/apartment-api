@@ -16,7 +16,8 @@ class CreateBillTypesTable extends Migration
         Schema::create('bill-types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->integer('parent_id')->default(0);
+            $table->tinyInteger('late_fees_on')->default(0)->comment('是否收取滞纳金');
+            $table->string('late_fees_name')->default('')->comment('滞纳金名称，如“租赁滞纳金”');
             $table->timestamps();
         });
     }

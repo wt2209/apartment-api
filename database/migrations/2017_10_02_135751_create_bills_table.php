@@ -24,6 +24,7 @@ class CreateBillsTable extends Migration
          */
         Schema::create('bills', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('serial_id'); // 每一次缴费（房租/物业/电梯/水电等）是一个serial_number
 
             // 此三项至少有一个不为空
             $table->unsignedInteger('person_id')->nullable();
@@ -33,14 +34,10 @@ class CreateBillsTable extends Migration
 
             $table->tinyInteger('symbol')->default(1)->comment('是否是退费，取值1和-1');
             $table->decimal('fees', 8, 2)->default(0)->comment('费用金额');
-            $table->tinyInteger('late_fees_on')->default(0)->comment('是否收取滞纳金');
+            $table->string('remark')->default('')->comment('费用说明');
             $table->decimal('late_rate', 5, 3)->default(0.003)->comment('滞纳金费率');
-            $table->decimal('late_fees', 8, 2)->default(0)->comment('滞纳金');
             $table->decimal('late_fees_base', 8, 2)->default(0)->comment('滞纳金的基数');
             $table->date('late_at')->nullable()->comment('计算滞纳金的时间');
-            $table->decimal('total_fees', 8, 2)->default(0)->comment('实际缴费，费用与滞纳金之和');
-            $table->decimal('turn_in_fees')->default(0)->comment('应上缴北船财务的钱，包含滞纳金');
-            $table->json('items')->comment('费用明细，字段：item,money,description,turn_in(是否上缴北船)');
             $table->string('payer')->comment('付款人');
             $table->tinyInteger('payed')->default(0)->comment('是否缴费');
             $table->dateTime('payed_at')->nullable()->comment('缴费时间');

@@ -45,7 +45,7 @@ Route::post('/login', 'Auth\LoginController@authenticate');
  *  5. 权限命名方式：请求方法名（get、post、put、delete之一） + 路由
  */
 Route::namespace('Api')->middleware(['jwt.auth', 'api'])->group(function () {
-    Route::get('/room-structure', 'RoomController@roomStructure')->middleware('RBAC:get-room-structure');;
+    Route::get('/room-structure', 'RoomController@roomStructure')->middleware('RBAC:get-room-structure');
     Route::get('/navigations', 'NavigationController@navigations')->middleware('RBAC:get-navigations');
     Route::post('/navigation', 'NavigationController@insert')->middleware('RBAC:post-navigation');
     Route::get('root-nodes', 'NavigationController@rootNodes')->middleware('RBAC:get-root-nodes');
@@ -56,6 +56,8 @@ Route::namespace('Api')->middleware(['jwt.auth', 'api'])->group(function () {
     Route::get('/people', 'PersonController@people')->middleware('RBAC:get-people');
     Route::get('/people/{:id}', 'PersonController@person')->middleware('RBAC:get-person');
     Route::post('/people', 'PersonController@store')->middleware('RBAC:post-people');
+    Route::get('/bill-types', 'BillController@billTypes')->middleware('RBAC:get-bill-types');;
+
 });
 
 

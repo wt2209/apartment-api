@@ -17,6 +17,7 @@ class CreateBillTypesTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->tinyInteger('late_fees_on')->default(0)->comment('是否收取滞纳金');
+            $table->decimal('late_rate', 5, 3)->default(0.003)->comment('滞纳金费率');
             $table->string('late_fees_name')->default('')->comment('滞纳金名称，如“租赁滞纳金”');
             $table->timestamps();
         });

@@ -20,16 +20,10 @@ class RoomController extends Controller
      */
     public function roomStructure()
     {
-        // TODO 使用了缓存，当房间有变化时（修改。调整房间用途等），需要手动释放缓存：Cache::forget(key)
-        if (Cache::has('roomStructure')) {
-            $ret = Cache::get('roomStructure');
-        } else {
-            $ret = [];
-            $roomTypes = RoomType::get();
-            foreach ($roomTypes as $roomType) {
-                $ret[] = $this->getBuildingsByType($roomType);
-            }
-            Cache::forever('roomStructure', $ret);
+        $ret = [];
+        $roomTypes = RoomType::get();
+        foreach ($roomTypes as $roomType) {
+            $ret[] = $this->getBuildingsByType($roomType);
         }
 
         return response()->json(['data' => $ret]);

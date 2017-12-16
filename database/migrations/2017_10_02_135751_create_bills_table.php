@@ -35,7 +35,7 @@ class CreateBillsTable extends Migration
             $table->tinyInteger('symbol')->default(1)->comment('是否是退费，取值1和-1');
             $table->decimal('fees', 8, 2)->default(0)->comment('费用金额');
             $table->string('remark')->default('')->comment('费用说明');
-            $table->decimal('late_rate', 5, 3)->default(0.003)->comment('滞纳金费率');
+
             $table->decimal('late_fees_base', 8, 2)->default(0)->comment('滞纳金的基数');
             $table->date('late_at')->nullable()->comment('计算滞纳金的时间');
             $table->string('payer')->comment('付款人');

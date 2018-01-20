@@ -12,12 +12,13 @@ class NavigationController extends Controller
     {
         $navs = Navigation::get();
         $tree = $this->arrayToTree($navs->toArray());
-        return response()->json(['data' => $tree]);
+        return $this->response($tree);
     }
 
     public function rootNodes(Request $request)
     {
-        return Navigation::where('parent_id', 0)->get();
+        $navs = Navigation::where('parent_id', 0)->get();
+        return $this->response($navs);
     }
 
     public function insert(Request $request)
@@ -30,9 +31,9 @@ class NavigationController extends Controller
             'parent_id'=> $request->get('parent_id', 0),
         ]);
         if ($nav) {
-            return response()->json([]);
+            return $this->response([]);
         } else {
-            return response()->json(['error'=>'内部错误'], 500);
+            return $this->errorResponse('内部错误');
         }
     }
 

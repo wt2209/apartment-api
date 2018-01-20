@@ -25,13 +25,13 @@ class RoomController extends Controller
         foreach ($roomTypes as $roomType) {
             $ret[] = $this->getBuildingsByType($roomType);
         }
-
-        return response()->json(['data' => $ret]);
+        return $this->response($ret);
     }
 
     public function roomTypes()
     {
-        return RoomType::get();
+        $types = RoomType::get();
+        $this->response($types);
     }
 
 
@@ -41,12 +41,12 @@ class RoomController extends Controller
     public function rooms(Request $request, $id = null)
     {
         if ($id) {
-            $room = Room::with('type')->find($id);
-            return response()->json(['data'=>$room]);
+            $ret = Room::with('type')->find($id);
+        } else {
+            // TODO paginate
+            $ret = Room::with('type')->get();
         }
-        // TODO paginate
-        $rooms = Room::with('type')->get();
-        return response()->json(['data' => $rooms]);
+        return $this->response($ret);
     }
 
     /**

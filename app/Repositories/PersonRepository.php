@@ -4,24 +4,14 @@ namespace App\Repositories;
 use App\Model\Person;
 use App\Model\Room;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Validator;
 
 class PersonRepository
 {
     public function getPeople(array $inputs)
     {
-        switch ($inputs['search']) {
-            case 'keyword':
-                $peopleInRooms = $this->getPeopleByKeyword($inputs['keyword']);
-                break;
-            case 'date':
-                $peopleInRooms = $this->getPeopleByRentDate($inputs);
-                break;
-            case 'select':
-                $peopleInRooms = $this->getPeopleBySelection($inputs);
-                break;
-            default:
-                $peopleInRooms = collect([]);
-        }
+        $peopleInRooms = $this->getPeopleBySearchType($inputs);
         return $this->formatData($peopleInRooms);
     }
 
@@ -33,6 +23,20 @@ class PersonRepository
     public function storePerson($person)
     {
         return Person::create($person);
+    }
+
+    private function getPeopleBySearchType($inputs)
+    {
+        switch ($inputs['search']) {
+            case 'keyword':
+                return $this->getPeopleByKeyword($inputs['keyword']);
+            case 'date':
+                return $this->getPeopleByRentDate($inputs);
+            case 'select':
+                return $this->getPeopleBySelection($inputs);
+            default:
+                return $peopleInRooms = collect([]);
+        }
     }
 
     /**

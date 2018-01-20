@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +43,7 @@ Route::post('/login', 'Auth\LoginController@authenticate');
  *  4. 由于'RBAC'中间件使用时需要获得已登录的用户信息，因此它必须在’jwt.auth'之后使用。
  *  5. 权限命名方式：请求方法名（get、post、put、delete之一） + 路由
  */
-Route::namespace('Api')->middleware(['jwt.auth', 'api'])->group(function () {
+Route::middleware(['jwt.auth', 'api'])->namespace('Api')->group(function () {
     Route::get('/room-structure', 'RoomController@roomStructure')->middleware('RBAC:get-room-structure');
     Route::get('/navigations', 'NavigationController@navigations')->middleware('RBAC:get-navigations');
     Route::post('/navigation', 'NavigationController@insert')->middleware('RBAC:post-navigation');

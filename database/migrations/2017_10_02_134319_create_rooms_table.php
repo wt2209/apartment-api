@@ -23,7 +23,7 @@ class CreateRoomsTable extends Migration
             $table->string('room')->nullable();
             $table->tinyInteger('person_number')->default(1)->comment('房间最大人数');
 
-            //格式： 2017-10-2：事件1|2017-9-15：事件2
+            //格式： 2017-10-2\事件1|2017-9-15\事件2
             $table->text('history_record')->nullable()->comment('房间历史事件记录');
             $table->string('remark')->nullable();
             $table->timestamps();

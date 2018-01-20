@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\AddBillRequest;
 use App\Model\BillType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,23 +10,13 @@ use Validator;
 
 class BillController extends Controller
 {
-    public function insert(Request $request)
+    public function insert(AddBillRequest $request)
     {
-        $this->validate($request, [
-            'room'=>"required|string",
-            'name'=>'nullable|string',
-            'charge' => "boolean",
-            'items.*.type' => 'nullable|integer',
-            'items.*.fees' => 'nullable|numeric',
-            'items.*.late_fees_base' => 'nullable|numeric',
-            'items.*.late_at' => 'nullable|date',
-        ]);
-
-
         foreach ($request->input('items') as $item) {
             
         }
-        return response()->json($request);
+
+        return $this->response([]);
     }
 
     public function billTypes()
@@ -35,7 +26,6 @@ class BillController extends Controller
         foreach ($billTypes as $billType) {
             $ret[$billType->id] = $billType;
         }
-
-        return response()->json(['data' => $ret]);
+        return $this->response($ret);
     }
 }

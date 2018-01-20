@@ -13,6 +13,7 @@ class CreateBillsTable extends Migration
      */
     public function up()
     {
+        
         Schema::create('bills', function (Blueprint $table) {
             $table->increments('id');
             $table->string('serial_number'); // 每一次缴费（房租/物业/电梯/水电等）是一个serial_number
